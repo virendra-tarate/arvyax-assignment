@@ -97,6 +97,6 @@ JWT_SECRET=your_jwt_secret_key
 ---
 
 ## Contact:
-  - maintainer: Virendra Tarate
-  - github: https://github.com/virendra-tarate
-  - contribute: Feel free to fork or raise issues!
+  - Maintainer: Virendra Tarate
+  - Github: https://github.com/virendra-tarate
+  - Contribute: Feel free to fork or raise issues!
