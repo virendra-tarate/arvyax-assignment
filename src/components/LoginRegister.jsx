@@ -7,9 +7,12 @@ const LoginRegister = () => {
     const [password, setPassword] = useState("");
     const [isLogin, setIsLogin] = useState(true);
     const [error, setError] = useState(null);
+    const [message, setMessage] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError(null);
+        setMessage(null);
         try {
             const endpoint = isLogin ? "/api/auth/login" : "/api/auth/register";
             const res = await axios.post("http://localhost:5000" + endpoint, {
@@ -18,9 +21,11 @@ const LoginRegister = () => {
             });
             if (res.data.token) {
                 localStorage.setItem("token", res.data.token);
-                window.location.href = "/my-sessions";
+                setMessage("Login successful. Redirecting to dashboard...");
+                setTimeout(() => (window.location.href = "/my-sessions"), 1500);
             } else {
-                alert(res.data.message);
+                setMessage("Registration successful. Redirecting to dashboard...");
+                setTimeout(() => (window.location.href = "/my-sessions"), 1500);
             }
         } catch (err) {
             setError(err.response?.data?.message || "Something went wrong");
@@ -32,6 +37,7 @@ const LoginRegister = () => {
             <form onSubmit={handleSubmit}>
                 <h2>{isLogin ? "Login" : "Register"}</h2>
                 {error && <p style={{ color: "red" }}>{error}</p>}
+                {message && <p style={{ color: "green" }}>{message}</p>}
                 <input
                     type="email"
                     value={email}
